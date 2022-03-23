@@ -40,3 +40,28 @@ function mainPrompts(){
             updateEmp();
         }
     })}
+
+// View all Roles, Employees or Departments
+function viewDept (){
+    console.log('Showing departments...\n');
+        connection.query('SELECT * FROM department', function(err, res){
+        if(err)throw err
+        console.table(res)
+        mainPrompts();
+    })}
+function viewRoles (){
+    console.log('Showing roles...\n');
+        connection.query('SELECT * FROM role', function(err,res){
+        if(err)throw err
+        console.table(res)
+        mainPrompts();
+    })}
+function viewEmp (){
+    console.log('Showing employees...\n');
+        connection.query('SELECT * FROM employee', function(err,res){
+        if(err)throw err
+        console.table(res)
+        mainPrompts();
+    })}
+    
+mainPrompts();

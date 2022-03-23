@@ -145,5 +145,27 @@ function addEmp (){
             mainPrompts();
         })
     })}
+
+// Update Employees
+function updateEmp (){
+    inquirer.prompt([
+        {
+            name: 'role_id',
+            message: "What is the new emplyoee's role id?",
+            type: 'input'
+        },
+        {
+            name: 'id',
+            message: "What is the employee's id?",
+            type:'input'
+        }
+        ]).then (res => {
+        connection.query('UPDATE employee ?',res,function(err){
+            if(err)throw err
+            console.log('Employee role is updated.');
+            mainPrompts();
+
+        }).then
+    })}
     
 mainPrompts();

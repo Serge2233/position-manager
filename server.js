@@ -63,5 +63,87 @@ function viewEmp (){
         console.table(res)
         mainPrompts();
     })}
+
+// Add Roles, Employees or Departments
+function addRole(){
+    inquirer.prompt([
+        {
+            name: 'title',
+            message: 'What is the roles title?',
+            type:'input'
+        },
+        {
+            name: 'salary',
+            message: 'What is the salary of this role?',
+            type:'input'
+        },
+        {
+            name: 'department_id',
+            message: 'What is the new department id?',
+            type:'list',
+            choices: [
+                {
+                    name:'IT',
+                    value: '1'
+                },
+                {
+                    name:'Finance & Accounting',
+                    value: '2'
+                },
+                {
+                    name:'Sales & Marketing',
+                    value: '3'
+                },{
+                    name:'Operations',
+                    value: '4'
+                },
+            ]
+        }
+    ]).then(res =>{
+        connection.query('INSERT INTO role SET ?',res,function(err){
+            if(err)throw err
+            console.log('New role is added.');
+            mainPrompts();
+        })
+    })}
+function addDept(){
+    inquirer.prompt([
+        {
+            name: 'name',
+            message: 'What is the new department name?',
+            type:'input'
+        },
+    ]).then(res =>{
+        connection.query('INSERT INTO department SET ?',res,function(err){
+            if(err)throw err
+            console.log('New department is added.');
+            mainPrompts();
+
+        })
+    })}
+function addEmp (){
+    inquirer.prompt([
+        {
+            name: 'first_name',
+            message: "What is the emplyoee's first name?",
+            type: 'input'
+        },
+        {
+            name: 'last_name',
+            message: "What is the emplyoee's last name?",
+            type: 'input'
+        },
+        {
+            name: 'role_id',
+            message: "What is the emplyoee's role id?",
+            type: 'input'
+        }
+    ]).then (res => {
+        connection.query('INSERT INTO employee SET ?',res,function(err){
+            if(err)throw err
+            console.log('New employee is added.');
+            mainPrompts();
+        })
+    })}
     
 mainPrompts();
